@@ -42,7 +42,7 @@
 						<dt> Enter calculation: </dt>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
-								<input type="text" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="button-addon2" id="userInput" maxlength="12">
+								<input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" id="userInput" maxlength="12" value="0" >
 							</div>
 						</div>
 					<div class="input-group mb-3">
@@ -58,66 +58,66 @@
 			<div id="keypad">
 			<ul class="nav nav-pills" id="unitsTab">
 					<li class="nav-item">
-					<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">AC</a>
+					<a class="nav-link" href="#" id="ac" data-toggle="tab" onclick="clr()">AC</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">+/-</a>
+						<a class="nav-link" href="#" id="neg" data-toggle="tab" onclick="opera(this.id)">+/-</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">%</a>
+						<a class="nav-link" href="#" id="%" data-toggle="tab" onclick="opera(this.id)">%</a>
 					</li>
 
 					<li class="nav-item" id="massNav" >
-						<a class="nav-link" href="#"  id="9" data-toggle="tab" onclick="tab(this.id)">/</a>
+						<a class="nav-link" href="#"  id="/" data-toggle="tab" onclick="opera(this.id)">/</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="8" data-toggle="tab" onclick="tab(this.id)">7</a>
+						<a class="nav-link" href="#" id="7" data-toggle="tab" onclick="num(this.id)">7</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="7" data-toggle="tab"onclick="tab(this.id)">8</a>
+						<a class="nav-link" href="#" id="8" data-toggle="tab"onclick="num(this.id)">8</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="6" data-toggle="tab" onclick="tab(this.id)">9</a>
+						<a class="nav-link" href="#" id="9" data-toggle="tab" onclick="num(this.id)">9</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="6" data-toggle="tab" onclick="tab(this.id)">X</a>
+						<a class="nav-link" href="#" id="*" data-toggle="tab" onclick="opera(this.id)">*</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="5" data-toggle="tab" onclick="tab(this.id)">4</a>
+						<a class="nav-link" href="#" id="4" data-toggle="tab" onclick="num(this.id)">4</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="5" data-toggle="tab" onclick="tab(this.id)">5</a>
+						<a class="nav-link" href="#" id="5" data-toggle="tab" onclick="num(this.id)">5</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="torque" data-toggle="tab" onclick="tab(this.id)">6</a>
+						<a class="nav-link" href="#" id="6" data-toggle="tab" onclick="num(this.id)">6</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">-</a>
+						<a class="nav-link" href="#" id="-" data-toggle="tab" onclick="opera(this.id)">-</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">1</a>
+						<a class="nav-link" href="#" id="1" data-toggle="tab" onclick="num(this.id)">1</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">2</a>
+						<a class="nav-link" href="#" id="2" data-toggle="tab" onclick="num(this.id)">2</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">3</a>
+						<a class="nav-link" href="#" id="3" data-toggle="tab" onclick="num(this.id)">3</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">+</a>
+						<a class="nav-link" href="#" id="+" data-toggle="tab" onclick="opera(this.id)">+</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">0</a>
+						<a class="nav-link" href="#" id="0" data-toggle="tab" onclick="num(this.id)">0</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">.</a>
+						<a class="nav-link" href="#" id="." data-toggle="tab" onclick="num(this.id)">.</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">PI</a>
+						<a class="nav-link" href="#" id="PI" data-toggle="tab" onclick="tab(this.id)">PI</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="area" data-toggle="tab" onclick="tab(this.id)">=</a>
+						<a class="nav-link" href="#" id="=" data-toggle="tab" onclick="equals(this.id)">=</a>
 					</li>
 
 				</ul>

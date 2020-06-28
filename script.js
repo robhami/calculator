@@ -1,8 +1,66 @@
+let number="";
+let numArray=[];
+let operaArray=[];
+let answer=1
 
-function tab (tabSelect) {
+function num (numSelect) {
+	console.log(numSelect)
+	
+	
+	 if(userInput.value==0) {	
+	 	userInput.value="";
+	 	userInput.value=numSelect;
+	 	number=numSelect;
+	 } else {
 
-	;
+	 	userInput.value=userInput.value+numSelect;
+	 	number=number+numSelect;
+	 	// console.log("display: ",display)
+	 	// console.log("UI val: ",userInput.value)
+	 }
+
 }
+
+
+function opera (operaSelect) {
+	// console.log(display);
+	// console.log(operaSelect);
+	userInput.value=userInput.value+operaSelect;
+	numArray.push(number);
+	number="";
+	operaArray.push(operaSelect);
+	
+	console.log(operaArray);
+
+}
+
+
+
+function equals () {
+	numArray.push(number);
+	console.log(numArray);
+	for(i=0;i<operaArray.length;i++) {
+
+		if((operaArray[i])="*");
+		 answer=answer*numArray[i]*numArray[i+1]; 
+		
+	}
+	console.log(answer);
+}
+
+function clr () {
+	console.log("clear");
+	number="";
+	numArray=[];
+	operaArray=[];
+	answer=1;
+	userInput.value=0;
+
+}
+
+
+
+
 
 function clearChildNodes (DDToClear) {
  	//clear childNodes whilst any exist
@@ -12,9 +70,6 @@ function clearChildNodes (DDToClear) {
 	}
  	
 }
-
-
-
 
 function formSubmit () {
 	
