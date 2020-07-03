@@ -2,50 +2,97 @@ let number="";
 let numArray=[];
 let operaArray=[];
 let answer=1
+let display=userInput.value;
+let numSelect="";
+
+
+userInput.addEventListener("keypress", function (event) {
+	console.log("event");
+	let keyCodeVal=event.keyCode;
+	console.log(keyCodeVal);
+	let numSelect = String.fromCharCode(keyCodeVal);
+	console.log(numSelect);
+ 	num(numSelect);
+	 // if(userInput.value==="0") {
+	 // 	userInput.value="";	
+	 // 	number=numSelect;
+	 // } 
+	 // 	else{
+	 // 	console.log("else");
+	 // 	number=parseFloat(number+numSelect);
+	 // }
+	 console.log(number);
+	 scroll();
+	console.log(number);
+})
+
+
 
 function num (numSelect) {
-	console.log(numSelect)
+	console.log("num func");
+
+
 	
-	
-	 if(userInput.value==0) {	
-	 	userInput.value="";
+	 if(userInput.value==="0") {
+	 	// userInput.value="";
+	 	// userInput.text="";		
 	 	userInput.value=numSelect;
 	 	number=numSelect;
-	 } else {
-
+	 } 
+	 	else{
 	 	userInput.value=userInput.value+numSelect;
-	 	number=number+numSelect;
-	 	// console.log("display: ",display)
-	 	// console.log("UI val: ",userInput.value)
+	 	number=parseFloat(number+numSelect);
 	 }
+	 console.log(number);
+	 scroll();
+}
 
+function dec (decSelect) {
+	userInput.value=(userInput.value + '.');
+	number=number+'.';
 }
 
 
 function opera (operaSelect) {
-	// console.log(display);
-	// console.log(operaSelect);
 	userInput.value=userInput.value+operaSelect;
-	numArray.push(number);
+	numArray.push(parseFloat(number));
 	number="";
 	operaArray.push(operaSelect);
-	
-	console.log(operaArray);
-
+	numSelect="";
 }
-
 
 
 function equals () {
 	numArray.push(number);
+	userInput.value=userInput.value+"=";
 	console.log(numArray);
 	for(i=0;i<operaArray.length;i++) {
-
-		if((operaArray[i])="*");
-		 answer=answer*numArray[i]*numArray[i+1]; 
-		
+		 switch (operaArray[i]) {
+		 	case "*":
+		 		answer=numArray[i]*numArray[i+1]; 
+		 		break;
+	 		case "+":
+		 		answer=numArray[i]+numArray[i+1]; 
+		 		break;
+	 		case "-":
+		 		answer=numArray[i]-numArray[i+1]; 
+		 		break;
+	 		case "/":
+		 		answer=numArray[i]/numArray[i+1]; 
+		 		break;
+	 		case "^":
+		 		answer=Math.pow(numArray[i],numArray[i+1]); 
+		 		break;
+		 }
 	}
 	console.log(answer);
+	userInput.value=userInput.value+answer;
+	number=answer;
+	numArray=[];
+	operaArray=[];
+	// userOutput.value=answer;
+	console.log(userInput.value);
+	scroll();
 }
 
 function clr () {
@@ -55,62 +102,25 @@ function clr () {
 	operaArray=[];
 	answer=1;
 	userInput.value=0;
+	// userOutput.value="Result";
 
 }
 
+function scroll () {
+	let len=userInput.scrollWidth;
+	let inputLen= document.getElementById("userInput").clientWidth;
+	let oFlow= len-inputLen;
+	// console.log(inputLen);
+	// console.log(len);
+	// console.log(oFlow);
 
-
-
-
-function clearChildNodes (DDToClear) {
- 	//clear childNodes whilst any exist
-	while(DDToClear.hasChildNodes()){
-	DDToClear.removeChild(DDToClear.firstChild);
-
-	}
- 	
-}
-
-function formSubmit () {
-	
-	ddChecker(unitsFrom);
-	ddChecker(unitsTo);
-	console.log(userInput.value);
-	let decimal = /[0-9]/;
-	
-
-	if (userInput.value.match(decimal)) {
-		
-		getResult(userInput.value);
-		 
-	} else {
-		alert ("Invalid Character Input");
-		throw "Invalid character input";
+	if(oFlow>0) {
+		userInput.scrollLeft=oFlow;
 	}
 
+	
+	
 }
 
 
-function ddChecker (ddCheck) {	
-	
-	if(ddCheck.value=="") {
-		let ddError = `${ddCheck.textContent}`;
-		alert (ddError + " dropdown is not selected");
-		throw (ddError + " dropdown is not selected");
-		//return;			
-	}
 
-}
-
-function getResult (userInputVal) {
-	
-	var unitsFromX = document.getElementById("unitsFrom").value;
-	var unitsToX = document.getElementById("unitsTo").value;
-	
-	resultX= +(userInputVal*(unitsToX/unitsFromX)).toFixed(7);
-	
-	userOutput.value = resultX;
-	console.log(userOutput.value);
-	
-
-}

@@ -7,7 +7,7 @@
 .form-control {
 
 	float:left;
-    width:275px;
+    width:185px;
 }
 
 
@@ -30,11 +30,13 @@
 
 #unitsTab > .nav-item > .nav-link {
 
-	width: 50px;
+	width: 35px;
 	border: solid #007BFF 1px ;
 	padding-right: 0px;
 	padding-left: 0px;
+	padding-top:5px;
 	margin: 0.5px;
+	height: 35px;
 }
 
 #unitsTab > .nav-item > .nav-link > .a {
@@ -51,14 +53,33 @@ dt {
 
 .card {
 
-	max-width: 325px;
-	min-width:325px;
+	max-width: 220px;
+	min-width: 220px;
 }
 
 #keypad {
-	width: 250px;
+	width: 185px;
 }
 
 .container {
 	padding-top: 10px;
+
+}
+
+.card-header {
+
+	max-height: 75px;
+	
+	
+}
+
+.card-body {
+
+	max-height: 225px;
+	
+}
+
+.input {
+
+	overflow-x: ;
 }
