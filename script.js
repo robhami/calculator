@@ -4,57 +4,80 @@ let operaArray=[];
 let answer=1
 let display=userInput.value;
 let numSelect="";
+let kp=false;
+console.log(kp);
 
+userInput.addEventListener("keypress", keyEntry)
 
-userInput.addEventListener("keypress", function (event) {
-	console.log("event");
+ function keyEntry (event) {	
 	let keyCodeVal=event.keyCode;
-	console.log(keyCodeVal);
+
 	let numSelect = String.fromCharCode(keyCodeVal);
-	console.log(numSelect);
- 	num(numSelect);
-	 // if(userInput.value==="0") {
-	 // 	userInput.value="";	
-	 // 	number=numSelect;
-	 // } 
-	 // 	else{
-	 // 	console.log("else");
-	 // 	number=parseFloat(number+numSelect);
-	 // }
-	 console.log(number);
-	 scroll();
-	console.log(number);
-})
+	let numKey = /[0-9]/;
+	let operator = /[+-/*]/;
+	let equalsym = /[=]/;
+	let decKey = /[.]/;
 
+	kp = true;
+	clearZero();
 
+	if (numKey.test(numSelect)) {
+		console.log("valid: ",numSelect);	
+		num(numSelect, kp);
+	}
 
-function num (numSelect) {
-	console.log("num func");
+	if (operator.test(numSelect)) {
+		console.log("valid: ",numSelect);
+		opera(numSelect, kp);	
 
+	}
 
-	
-	 if(userInput.value==="0") {
-	 	// userInput.value="";
-	 	// userInput.text="";		
-	 	userInput.value=numSelect;
-	 	number=numSelect;
-	 } 
-	 	else{
-	 	userInput.value=userInput.value+numSelect;
-	 	number=parseFloat(number+numSelect);
-	 }
-	 console.log(number);
-	 scroll();
+	if (equalsym.test(numSelect)) {
+		console.log("valid: ",numSelect);
+		kp = true;
+		equals(numSelect);	
+
+	}
+
+	if (decKey.test(numSelect)) {
+		console.log("valid: ",numSelect);
+		dec(numSelect, kp);	
+
+	}
+
+ 	scroll();
+
 }
 
-function dec (decSelect) {
+function clearZero () {
+	if(userInput.value==="0") {		
+	 	userInput.value="";
+ 	 } 
+}
+
+function num (numSelect, kp) {	
+	clearZero();	 
+ 	 if (!kp) {
+ 	 	userInput.value=userInput.value+numSelect;
+ 	}  
+
+
+	 number=parseFloat(number+numSelect);
+	 scroll();
+	 document.getElementById('userInput').focus();	
+}
+
+function dec () {
 	userInput.value=(userInput.value + '.');
 	number=number+'.';
 }
 
 
-function opera (operaSelect) {
-	userInput.value=userInput.value+operaSelect;
+function opera (operaSelect, kp) {
+
+	if (!kp) {
+		userInput.value=userInput.value+operaSelect;		
+	}
 	numArray.push(parseFloat(number));
 	number="";
 	operaArray.push(operaSelect);
@@ -62,9 +85,12 @@ function opera (operaSelect) {
 }
 
 
-function equals () {
+function equals (equalSelect) {
+	console.log(kp);
+
 	numArray.push(number);
-	userInput.value=userInput.value+"=";
+	
+
 	console.log(numArray);
 	for(i=0;i<operaArray.length;i++) {
 		 switch (operaArray[i]) {
@@ -85,14 +111,21 @@ function equals () {
 		 		break;
 		 }
 	}
+	if (!kp) {
+		userInput.value=userInput.value+'=';
+	}
+
 	console.log(answer);
-	userInput.value=userInput.value+answer;
-	number=answer;
+	console.log(userInput.value);
+	
+		
+	userInput.value=(userInput.value).concat(answer);
 	numArray=[];
 	operaArray=[];
-	// userOutput.value=answer;
 	console.log(userInput.value);
+	document.getElementById('userInput').focus();	
 	scroll();
+	
 }
 
 function clr () {
@@ -101,25 +134,18 @@ function clr () {
 	numArray=[];
 	operaArray=[];
 	answer=1;
+	document.getElementById('userInput').focus();	
 	userInput.value=0;
-	// userOutput.value="Result";
-
+	
 }
 
 function scroll () {
 	let len=userInput.scrollWidth;
 	let inputLen= document.getElementById("userInput").clientWidth;
 	let oFlow= len-inputLen;
-	// console.log(inputLen);
-	// console.log(len);
-	// console.log(oFlow);
-
 	if(oFlow>0) {
 		userInput.scrollLeft=oFlow;
-	}
-
-	
-	
+	}	
 }
 
 
