@@ -1,18 +1,17 @@
 let number="";
 let numArray=[];
 let operaArray=[];
-let answer=1
+let answer=0;
 let display=userInput.value;
 let numSelect="";
 let kp=false;
 console.log(kp);
+let memory = 0;
 
-userInput.addEventListener("keypress", keyEntry)
+userInput.addEventListener("keyup", keyEntry)
 
  function keyEntry (event) {	
-	let keyCodeVal=event.keyCode;
-
-	let numSelect = String.fromCharCode(keyCodeVal);
+	let numSelect=event.key;
 	let numKey = /[0-9]/;
 	let operator = /[+-/*]/;
 	let equalsym = /[=]/;
@@ -60,11 +59,10 @@ function num (numSelect, kp) {
  	 if (!kp) {
  	 	userInput.value=userInput.value+numSelect;
  	}  
-
-
 	 number=parseFloat(number+numSelect);
 	 scroll();
-	 document.getElementById('userInput').focus();	
+	 document.getElementById('userInput').focus();
+	 kp=false;	
 }
 
 function dec () {
@@ -120,10 +118,12 @@ function equals (equalSelect) {
 	
 		
 	userInput.value=(userInput.value).concat(answer);
+	number=answer;
 	numArray=[];
 	operaArray=[];
 	console.log(userInput.value);
 	document.getElementById('userInput').focus();	
+
 	scroll();
 	
 }
@@ -134,10 +134,47 @@ function clr () {
 	numArray=[];
 	operaArray=[];
 	answer=1;
-	document.getElementById('userInput').focus();	
+		
 	userInput.value=0;
-	
+	document.getElementById('userInput').focus();
+	document.getElementById('userInput').selectionEnd= -1;
 }
+
+function neg () {
+
+ console.log("neg");
+ 	userInput.value=userInput.value * -1;
+
+
+}
+
+
+function mem (keyInput) {
+ console.log(keyInput)
+ 	switch (keyInput) {
+		 	case "ms":
+		 		memory=number; 
+		 		console.log(memory);
+		 		break;
+	 		case "mr":
+		 		userInput.value = memory;
+		 		break;
+	 		case "mc":
+		 		memory = 0;
+		 		break;
+	 		case "m+":
+		 		memory=memory+number;
+		 		break;
+	 		case "^":
+		 		 
+		 		break;
+		 }
+
+}
+
+
+
+
 
 function scroll () {
 	let len=userInput.scrollWidth;
