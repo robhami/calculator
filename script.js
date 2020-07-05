@@ -1,51 +1,131 @@
 let number="";
 let numArray=[];
 let operaArray=[];
-let answer=1
+let answer=0;
+let display=userInput.value;
+let numSelect="";
+let kp=false;
+console.log(kp);
+let memory = 0;
 
-function num (numSelect) {
-	console.log(numSelect)
-	
-	
-	 if(userInput.value==0) {	
-	 	userInput.value="";
-	 	userInput.value=numSelect;
-	 	number=numSelect;
-	 } else {
+userInput.addEventListener("keyup", keyEntry)
 
-	 	userInput.value=userInput.value+numSelect;
-	 	number=number+numSelect;
-	 	// console.log("display: ",display)
-	 	// console.log("UI val: ",userInput.value)
-	 }
+ function keyEntry (event) {	
+	let numSelect=event.key;
+	let numKey = /[0-9]/;
+	let operator = /[+-/*]/;
+	let equalsym = /[=]/;
+	let decKey = /[.]/;
+
+	kp = true;
+	clearZero();
+
+	if (numKey.test(numSelect)) {
+		console.log("valid: ",numSelect);	
+		num(numSelect, kp);
+	}
+
+	if (operator.test(numSelect)) {
+		console.log("valid: ",numSelect);
+		opera(numSelect, kp);	
+
+	}
+
+	if (equalsym.test(numSelect)) {
+		console.log("valid: ",numSelect);
+		kp = true;
+		equals(numSelect);	
+
+	}
+
+	if (decKey.test(numSelect)) {
+		console.log("valid: ",numSelect);
+		dec(numSelect, kp);	
+
+	}
+
+ 	scroll();
 
 }
 
+function clearZero () {
+	if(userInput.value==="0") {		
+	 	userInput.value="";
+ 	 } 
+}
 
-function opera (operaSelect) {
-	// console.log(display);
-	// console.log(operaSelect);
-	userInput.value=userInput.value+operaSelect;
-	numArray.push(number);
+function num (numSelect, kp) {	
+	clearZero();	 
+ 	 if (!kp) {
+ 	 	userInput.value=userInput.value+numSelect;
+ 	}  
+	 number=parseFloat(number+numSelect);
+	 scroll();
+	 document.getElementById('userInput').focus();
+	 kp=false;	
+}
+
+function dec () {
+	userInput.value=(userInput.value + '.');
+	number=number+'.';
+}
+
+
+function opera (operaSelect, kp) {
+
+	if (!kp) {
+		userInput.value=userInput.value+operaSelect;		
+	}
+	numArray.push(parseFloat(number));
 	number="";
 	operaArray.push(operaSelect);
-	
-	console.log(operaArray);
-
+	numSelect="";
 }
 
 
+function equals (equalSelect) {
+	console.log(kp);
 
-function equals () {
 	numArray.push(number);
+	
+
 	console.log(numArray);
 	for(i=0;i<operaArray.length;i++) {
-
-		if((operaArray[i])="*");
-		 answer=answer*numArray[i]*numArray[i+1]; 
-		
+		 switch (operaArray[i]) {
+		 	case "*":
+		 		answer=numArray[i]*numArray[i+1]; 
+		 		break;
+	 		case "+":
+		 		answer=numArray[i]+numArray[i+1]; 
+		 		break;
+	 		case "-":
+		 		answer=numArray[i]-numArray[i+1]; 
+		 		break;
+	 		case "/":
+		 		answer=numArray[i]/numArray[i+1]; 
+		 		break;
+	 		case "^":
+		 		answer=Math.pow(numArray[i],numArray[i+1]); 
+		 		break;
+		 }
 	}
+	if (!kp) {
+		userInput.value=userInput.value+'=';
+	}
+
 	console.log(answer);
+	console.log(userInput.value);
+	
+		
+	userInput.value=(userInput.value).concat(answer);
+	number=answer;
+	numArray=[];
+	operaArray=[];
+	console.log(userInput.value);
+	document.getElementById('userInput').focus();	
+
+	scroll();
+	
 }
 
 function clr () {
@@ -54,63 +134,56 @@ function clr () {
 	numArray=[];
 	operaArray=[];
 	answer=1;
-	userInput.value=0;
-
-}
-
-
-
-
-
-function clearChildNodes (DDToClear) {
- 	//clear childNodes whilst any exist
-	while(DDToClear.hasChildNodes()){
-	DDToClear.removeChild(DDToClear.firstChild);
-
-	}
- 	
-}
-
-function formSubmit () {
-	
-	ddChecker(unitsFrom);
-	ddChecker(unitsTo);
-	console.log(userInput.value);
-	let decimal = /[0-9]/;
-	
-
-	if (userInput.value.match(decimal)) {
 		
-		getResult(userInput.value);
-		 
-	} else {
-		alert ("Invalid Character Input");
-		throw "Invalid character input";
-	}
+	userInput.value=0;
+	document.getElementById('userInput').focus();
+	document.getElementById('userInput').selectionEnd= -1;
+}
+
+function neg () {
+
+ console.log("neg");
+ 	userInput.value=userInput.value * -1;
+
 
 }
 
 
-function ddChecker (ddCheck) {	
-	
-	if(ddCheck.value=="") {
-		let ddError = `${ddCheck.textContent}`;
-		alert (ddError + " dropdown is not selected");
-		throw (ddError + " dropdown is not selected");
-		//return;			
-	}
+function mem (keyInput) {
+ console.log(keyInput)
+ 	switch (keyInput) {
+		 	case "ms":
+		 		memory=number; 
+		 		console.log(memory);
+		 		break;
+	 		case "mr":
+		 		userInput.value = memory;
+		 		break;
+	 		case "mc":
+		 		memory = 0;
+		 		break;
+	 		case "m+":
+		 		memory=memory+number;
+		 		break;
+	 		case "^":
+		 		 
+		 		break;
+		 }
 
 }
 
-function getResult (userInputVal) {
-	
-	var unitsFromX = document.getElementById("unitsFrom").value;
-	var unitsToX = document.getElementById("unitsTo").value;
-	
-	resultX= +(userInputVal*(unitsToX/unitsFromX)).toFixed(7);
-	
-	userOutput.value = resultX;
-	console.log(userOutput.value);
-	
 
+
+
+
+function scroll () {
+	let len=userInput.scrollWidth;
+	let inputLen= document.getElementById("userInput").clientWidth;
+	let oFlow= len-inputLen;
+	if(oFlow>0) {
+		userInput.scrollLeft=oFlow;
+	}	
 }
+
+
+

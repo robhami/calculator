@@ -38,18 +38,18 @@
 		<div class="card">
 			<div class="card text-center">
 				<div class="card-header">
-					<h2>Calculator</h2>
-						<dt> Enter calculation: </dt>
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" id="userInput" maxlength="12" value="0" >
+					<!-- <h2>Calculator</h2> -->
+						<!-- <dt> Enter calculation: </dt> -->
+						
+							<div class="input">
+								<input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" id="userInput"  value="0" autofocus="autofocus">
 							</div>
-						</div>
-					<div class="input-group mb-3">
+						
+					<!-- <div class="input-group mb-3">
 						<div class="input-group-append">
 							<input type="text" class="form-control" placeholder="Result" aria-label="Recipient's username" aria-describedby="button-addon2" maxlength="11" id="userOutput" disabled ></input>	
 						</div>	
-					</div>
+					</div> -->
 				</div>
 				
 
@@ -61,14 +61,16 @@
 					<a class="nav-link" href="#" id="ac" data-toggle="tab" onclick="clr()">AC</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="neg" data-toggle="tab" onclick="opera(this.id)">+/-</a>
+						<a class="nav-link" href="#" id="neg" data-toggle="tab" onclick="neg(this.id)" >+/-</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="%" data-toggle="tab" onclick="opera(this.id)">%</a>
+						<a class="nav-link" href="#" id="^" data-toggle="tab" onclick="opera(this.id)">^</a>
 					</li>
-
-					<li class="nav-item" id="massNav" >
+					<li class="nav-item">
 						<a class="nav-link" href="#"  id="/" data-toggle="tab" onclick="opera(this.id)">/</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"  id="ms" data-toggle="tab" onclick="mem(this.id)">MS</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#" id="7" data-toggle="tab" onclick="num(this.id)">7</a>
@@ -81,6 +83,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#" id="*" data-toggle="tab" onclick="opera(this.id)">*</a>
+					</li>
+					<li class="nav-item" id="massNav" >
+						<a class="nav-link" href="#"  id="mr" data-toggle="tab" onclick="mem(this.id)">MR</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#" id="4" data-toggle="tab" onclick="num(this.id)">4</a>
@@ -96,6 +101,11 @@
 						<a class="nav-link" href="#" id="-" data-toggle="tab" onclick="opera(this.id)">-</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="#" id="mc" data-toggle="tab" onclick="mem(this.id)">MC</a>
+					</li>
+
+
+					<li class="nav-item">
 						<a class="nav-link" href="#" id="1" data-toggle="tab" onclick="num(this.id)">1</a>
 					</li>
 					<li class="nav-item">
@@ -108,13 +118,16 @@
 						<a class="nav-link" href="#" id="+" data-toggle="tab" onclick="opera(this.id)">+</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="#" id="m+" data-toggle="tab" onclick="mem(this.id)">M+</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" href="#" id="0" data-toggle="tab" onclick="num(this.id)">0</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="." data-toggle="tab" onclick="num(this.id)">.</a>
+						<a class="nav-link" href="#" id="." data-toggle="tab" onclick="dec(this.id)">.</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#" id="PI" data-toggle="tab" onclick="tab(this.id)">PI</a>
+						<a class="nav-link" href="#" id="3.14159265359" data-toggle="tab" onclick="num(this.id)">PI</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#" id="=" data-toggle="tab" onclick="equals(this.id)">=</a>
