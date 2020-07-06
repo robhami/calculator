@@ -2,72 +2,96 @@ let number="";
 let numArray=[];
 let operaArray=[];
 let answer=0;
-let display=userInput.value;
 let numSelect="";
 let kp=false;
-console.log(kp);
+let leadZero=false;
 let memory = 0;
 
-userInput.addEventListener("keyup", keyEntry)
+userInput.addEventListener("keypress", keyEntry)
+userInput.addEventListener("keyup", keyEntry2)
 
  function keyEntry (event) {	
 	let numSelect=event.key;
-	let numKey = /[0-9]/;
-	let operator = /[+-/*]/;
-	let equalsym = /[=]/;
+	let numKey = /[1-9]/;
 	let decKey = /[.]/;
-
+	console.log(numSelect);
 	kp = true;
 	clearZero();
 
 	if (numKey.test(numSelect)) {
-		console.log("valid: ",numSelect);	
+		console.log("num valid: ", numSelect);	
 		num(numSelect, kp);
 	}
 
-	if (operator.test(numSelect)) {
-		console.log("valid: ",numSelect);
+	if (numSelect === "+" || numSelect === "*" || numSelect === "-" || numSelect === "/") {
+		console.log("opera valid: ", numSelect);
 		opera(numSelect, kp);	
-
 	}
 
-	if (equalsym.test(numSelect)) {
-		console.log("valid: ",numSelect);
+	if (decKey.test(numSelect)) {
+		console.log("dec valid: ", numSelect);
+		dec(numSelect, kp);	
+	}
+}
+
+ function keyEntry2 (event) {	
+	let numSelect=event.key;
+	kp = true;
+	clearZero();
+
+	if (numSelect==="=") {
+		console.log("= valid: ",numSelect);
 		kp = true;
 		equals(numSelect);	
 
 	}
 
-	if (decKey.test(numSelect)) {
-		console.log("valid: ",numSelect);
-		dec(numSelect, kp);	
-
+	if (numSelect=="0") {
+		console.log("zero");
+		if (leadZero) {
+			num(numSelect,kp)
+			console.log("valid: ",numSelect);
+		} else {
+		userInput.value="0";
+		leadZero=true;
+		
+		}
 	}
-
- 	scroll();
-
 }
 
 function clearZero () {
-	if(userInput.value==="0") {		
+	
+	if(userInput.value==="0" && (!leadZero)) {		
 	 	userInput.value="";
+	 	leadZero=true;
  	 } 
 }
 
 function num (numSelect, kp) {	
-	clearZero();	 
+	clearZero();
+	console.log(number)	; 
  	 if (!kp) {
  	 	userInput.value=userInput.value+numSelect;
  	}  
-	 number=parseFloat(number+numSelect);
+
+ 	// 0. entered parsefloat is returning .
+	 number=(number+numSelect);
 	 scroll();
 	 document.getElementById('userInput').focus();
-	 kp=false;	
+	 kp=false;
+	 console.log("num: ", number);	
 }
 
 function dec () {
+	console.log(kp);
+	if (!kp) {
 	userInput.value=(userInput.value + '.');
+	
+	}
+
 	number=number+'.';
+
+
 }
 
 
@@ -77,6 +101,7 @@ function opera (operaSelect, kp) {
 		userInput.value=userInput.value+operaSelect;		
 	}
 	numArray.push(parseFloat(number));
+	console.log("opera: ", number);
 	number="";
 	operaArray.push(operaSelect);
 	numSelect="";
@@ -85,8 +110,8 @@ function opera (operaSelect, kp) {
 
 function equals (equalSelect) {
 	console.log(kp);
-
-	numArray.push(number);
+	
+	numArray.push(parseFloat(number));
 	
 
 	console.log(numArray);
@@ -115,7 +140,7 @@ function equals (equalSelect) {
 
 	console.log(answer);
 	console.log(userInput.value);
-	
+	answer = parseFloat(answer.toPrecision(10));
 		
 	userInput.value=(userInput.value).concat(answer);
 	number=answer;
@@ -129,13 +154,15 @@ function equals (equalSelect) {
 }
 
 function clr () {
+	// probably just reload window?
 	console.log("clear");
 	number="";
 	numArray=[];
 	operaArray=[];
-	answer=1;
+	answer=0;
 		
-	userInput.value=0;
+	userInput.value="0";
+	leadZero=false;
 	document.getElementById('userInput').focus();
 	document.getElementById('userInput').selectionEnd= -1;
 }
